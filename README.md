@@ -16,6 +16,9 @@ by [Yan Wang](https://www.cs.cornell.edu/~yanwang/), [Wei-Lun Chao](http://www-s
   year={2019}
 }
 ```
+## Update
+* 29th July 2019: `submission.py` will save the disparity to the numpy file, not png file. And fix the `generate_lidar.py`.
+* I have modifed the official avod a little bit. Now you can directly train and test pseudo-lidar with avod. Please check the code https://github.com/mileyan/avod_pl.
 
 ## Contents
 
@@ -112,17 +115,18 @@ python ./psmnet/submission.py \
 ```angular2html
 # training
 python ./preprocessing/generate_lidar.py  \
-    --calib_path ./KITTI/object/training/calib/ \
-    --save_path ./KITTI/object/training/pseudo-lidar_velodyne/ \
-    --disp_path ./KITTI/object/training/predict_disparity \
+    --calib_dir ./KITTI/object/training/calib/ \
+    --save_dir ./KITTI/object/training/pseudo-lidar_velodyne/ \
+    --disparity_dir ./KITTI/object/training/predict_disparity \
     --max_high 1
 # testing
 python ./preprocessing/generate_lidar.py  \
-    --calib_path ./KITTI/object/testing/calib/ \
-    --save_path ./KITTI/object/testing/pseudo-lidar_velodyne/ \
-    --disp_path ./KITTI/object/testing/predict_disparity \
+    --calib_dir ./KITTI/object/testing/calib/ \
+    --save_dir ./KITTI/object/testing/pseudo-lidar_velodyne/ \
+    --disparity_dir ./KITTI/object/testing/predict_disparity \
     --max_high 1
 ```
+If you want to generate point cloud from depth map (like DORN), you can add `--is_depth` in the command.
 
 #### 2.6 Generate ground plane
 If you want to train an [AVOD]( https://github.com/kujason/avod) model for 3D object detection, you need to generate ground planes from pseudo-lidar point clouds.
@@ -162,6 +166,9 @@ Follow their README to train the v1 model. You can also download our pretrained 
 ## Results
 The main results on the validation dataset of our pseudo-LiDAR method.
 ![Figure](figures/result.png)
+
+You can download the avod validation results from [HERE](https://drive.google.com/file/d/13nOhBCmj8rzjMHDEw3syROuqHsoxWIKJ/view?usp=sharing).
+
 
 ## Contact
 If you have any question, please feel free to email us.
